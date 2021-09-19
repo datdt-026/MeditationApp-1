@@ -1,12 +1,34 @@
 import React from 'react';
-import {Dimensions, StyleSheet} from 'react-native';
-import {View, Text, Colors, Image, TouchableOpacity} from 'react-native-ui-lib';
+import {Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, Colors, Image, Button} from 'react-native-ui-lib';
+import {RootStackParamList} from '../../nav/RootStack';
+import {StackNavigationProp} from '@react-navigation/stack';
+
+type WelcomeSleepScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'WelcomeSleep'
+>;
+
+type Props = {
+  navigation: WelcomeSleepScreenNavigationProp;
+};
 
 const width = Dimensions.get('window').width;
-const Onboarding = () => {
+const height = Dimensions.get('window').height;
+const WelcomeSleep = ({navigation}: Props) => {
   return (
     <View flex backgroundColor={Colors.bgColor2}>
-      <View flex center marginT-30>
+      <Image
+        assetGroup="WelcomeSleep"
+        assetName="welcomesleep"
+        style={styles.background}
+      />
+      <Image
+        assetGroup="WelcomeSleep"
+        assetName="bgsleep"
+        style={styles.background1}
+      />
+      <View flex center marginT-50>
         <Text b28 marginB-15 textColor4>
           Welcome to Sleep
         </Text>
@@ -22,18 +44,8 @@ const Onboarding = () => {
           </Text>
         </View>
       </View>
+
       <View flex center>
-        {/* <Image
-          assetGroup="Onboarding"
-          assetName="Frame"
-          style={{
-            alignSelf: 'center',
-            position: 'absolute',
-            width: width,
-            height: (width / 423) *400,
-            resizeMode: 'stretch',
-          }}
-        /> */}
         <Image
           assetGroup="WelcomeSleep"
           assetName="Bird"
@@ -41,12 +53,20 @@ const Onboarding = () => {
         />
       </View>
 
-      <View flex center style={{alignItems: 'center'}}>
+      <View flex center>
         <TouchableOpacity
-          backgroundColor={Colors.primary}
-          style={{width: 340, height: 57}}
-          center
-          br60>
+          style={{
+            width: 350,
+            height: 60,
+            backgroundColor: Colors.primary,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 38,
+          }}
+          onPress={() => {
+            navigation.navigate('SleepMusic')
+          }}
+        >
           <Text m14 textColor8>
             GET STARTED
           </Text>
@@ -56,6 +76,21 @@ const Onboarding = () => {
   );
 };
 
-export default Onboarding;
+export default WelcomeSleep;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  background: {
+    alignSelf: 'center',
+    position: 'absolute',
+    width: width,
+    height: height,
+    resizeMode: 'stretch',
+  },
+  background1: {
+    alignSelf: 'center',
+    position: 'absolute',
+    width: width,
+    height: height,
+    resizeMode: 'stretch',
+  },
+});
